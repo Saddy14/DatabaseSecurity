@@ -4,7 +4,7 @@ const sql = require('mssql')
 
 const config = {
 
-    server: process.env.server, //? Server name == IP address
+    server: process.env.server, //? Server name == IP address of your DB | By Default Port is set to = 1433  
     database: process.env.database, // ? Database name == Assignment
     user: process.env.user, //? User name 
     password: process.env.password, //? Password
