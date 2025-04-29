@@ -3,27 +3,61 @@ const app = express()
 const port = 3000
 const bodyParser = require('body-parser');
 const cors = require('cors');
-// const bodyParser = require('body-parser');
+const path = require('path');
 const { connect } = require('./db.js')
 
 app.use(bodyParser.json()) //? For JSON data
 app.use(bodyParser.urlencoded({ extended: true })) //? For URL encoded data
 app.use(cors()) //? For CORS
 
-connect() //? Connect to the database
-
-    .then(() => {
-        console.log("Connected to the database")
-    })
-    .catch((err) => {
-        console.log("Error connecting to the database: " + err)
-    })
+// Serve static files
+app.use(express.static(path.join(__dirname, 'Public')));
 
 
-app.get('/', (req, res) => {
+// connect() //? Connect to the database
 
-    res.send("Hello")
+//     .then(() => {
+//         console.log("Connected to the database")
+//     })
+//     .catch((err) => {
+//         console.log("Error connecting to the database: " + err)
+//     })
+
+
+app.get('/login', (req, res) => {
+
+    res.sendFile(path.join(__dirname, 'Public', 'login.html'));
 });
+
+app.post('/login', (req, res) => {
+
+    res.sendFile(path.join(__dirname, 'Public', 'admin-dashboard.html'));
+
+    console.log("Login Form Info:");
+    console.log(req.body);
+    
+    
+
+});
+
+app.get('/sign-up', (req, res) => {
+
+    res.sendFile(path.join(__dirname, 'Public', 'sign-up.html'));
+});
+
+app.get('/why-us', (req, res) => {
+
+    res.sendFile(path.join(__dirname, 'Public', 'why-us.html'));
+});
+
+app.get('/contact', (req, res) => {
+
+    res.sendFile(path.join(__dirname, 'Public', 'contact.html'));
+});
+
+
+
+
 
 app.listen(port, () => {
 
