@@ -19,13 +19,15 @@
             <div class="logo-name"><span>Home</span>WoW</div>
         </a>
         <ul class="side-menu">
-            <li><a id="sidebar-dashboard" href="#"><i class='bx bxs-dashboard'></i>Dashboard</a></li>
-            <li><a id="admin-property-management" href="#"><i class='bx bx bx-home'></i>Property Management</a></li>
-            <li class="active"><a id="admin-user-management" href="#"><i class='bx bx-group'></i>User Management</a></li>
-            <li><a id="admin-payment-log" href="#"><i class='bx bx bx-detail'></i>Payment Log</a></li>
+            <li><a id="sidebar-dashboard" href="admin-dashboard"><i class='bx bxs-dashboard'></i>Dashboard</a></li>
+            <li><a id="admin-property-management" href="admin-property-management"><i class='bx bx bx-home'></i>Property
+                    Management</a></li>
+            <li class="active"><a id="admin-user-management" href="admin-user-management"><i
+                        class='bx bx-group'></i>User Management</a></li>
+            <li><a id="admin-payment-log" href="admin-payment-log"><i class='bx bx bx-detail'></i>Payment Log</a></li>
         </ul>
         <ul class="side-menu">
-            <li><a href="admin-contact-us.html" class="contact-us"><i class='bx bx bx-phone'></i>Contact Us</a></li>
+            <!-- <li><a href="/contact" class="contact-us"><i class='bx bx bx-phone'></i>Contact Us</a></li> -->
             <li><a href="/logout" class="logout"><i class='bx bx-log-out-circle'></i>Logout</a></li>
         </ul>
     </div>
@@ -79,14 +81,18 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td><p>John Doe (Test)</p></td>
+                                <td>
+                                    <p>John Doe (Test)</p>
+                                </td>
                                 <td>012-234 7324</td>
                                 <td>johndoe@gmail.com</td>
                                 <td><span class="user-type tenant">Tenant</span></td>
                                 <!-- <td><button class="remove-user" type="submit">Remove</button></td> -->
                             </tr>
                             <tr>
-                                <td><p>Ryan (Test)</p></td>
+                                <td>
+                                    <p>Ryan (Test)</p>
+                                </td>
                                 <td>017-934 3729</td>
                                 <td>ryan@gmail.com</td>
                                 <td><span class="user-type tenant">Tenant</span></td>
@@ -104,80 +110,33 @@
 </body>
 <script>
     window.onload = function () {
-        fetch('/current-user')
-            .then(response => response.json())
-            .then(user => {
-                // document.getElementById('account-name').textContent = user.name;
-
-                // // Update the href of the anchor dashboard link
-                document.getElementById('sidebar-dashboard').href = `/admin-dashboard.html?username=${user.name}&userType=${user.userType}&userId=${user.id}`;
-
-                // Update the href of the my property link
-                document.getElementById('admin-property-management').href = `/admin-property-management.html?username=${user.name}&userType=${user.userType}&userId=${user.id}`;
-
-                // Update the href of the user management link
-                document.getElementById('admin-user-management').href = `/admin-user-management.html?username=${user.name}&userType=${user.userType}&userId=${user.id}`;
-
-                // Update the href of the payment log link
-                document.getElementById('admin-payment-log').href = `/admin-payment-log.html?username=${user.name}&userType=${user.userType}&userId=${user.id}`;
-
-                // Update the href of the contact us link
-                // document.getElementById('contact-us').href = `/owner-agent-contact-us.html?username=${user.name}&userType=${user.userType}&userId=${user.id}`;
-            })
 
         // Fetch all users
-        fetch('/users')
+        fetch('getAllUser')
             .then(response => response.json())
             .then(users => {
                 const tbody = document.querySelector('.orders table tbody');
 
                 users.forEach(user => {
-            // Skip users with userType of 'Admin'
-            if (user.userType === 'Admin') {
-                return;
-            }
+                    // Skip users with userType of 'Admin'
+                    if (user.Type === 'Admin') {
+                        return;
+                    }
 
-            const userHtml = `
+                    const userHtml = `
                 <tr>
                     <td><p>${user.name}</p></td>
                     <td>${user.phone}</td>
                     <td>${user.email}</td>
-                    <td><span class="user-type ${user.userType}">${user.userType}</span></td>
-                    <td><button id="remove-${user._id}" class="remove-user" type="submit">Remove</button></td>
+                    <td><span class="user-type tenant">Tenant</span></td>
+                    <td><button id="remove-${user.id}" class="remove-user" type="submit">Remove</button></td>
                 </tr>
             `;
-            tbody.innerHTML += userHtml;
-        });
-
-                tbody.addEventListener('click', function (event) {
-                    if (event.target.classList.contains('remove-user')) {
-                        const id = event.target.id.split('-')[1];
-                        // Handle remove
-                        console.log(`Remove button clicked for user ${id}`);
-                        if (window.confirm('Are you sure you want to remove this user?')) {
-
-                            // Make a DELETE request to the server
-                            fetch(`/users/${id}`, {
-                                method: 'DELETE',
-                            })
-                                .then(response => {
-                                    if (!response.ok) {
-                                        throw new Error(`HTTP error! status: ${response.status}`);
-                                    }
-                                    return response.json();
-                                })
-                                .then(data => {
-                                    console.log('User was deleted successfully');
-                                    location.reload();
-                                })
-                                .catch(error => {
-                                    console.error('There was an error deleting the user', error);
-                                });
-                        }
-                    }
+                    tbody.innerHTML += userHtml;
                 });
+
             })
-            .catch(error => console.error(error));
+            // .catch(error => console.error(error));
     };
 </script>
 

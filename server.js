@@ -72,6 +72,54 @@ app.get('/logout', (req, res) => {
     res.sendFile(path.join(__dirname, 'Public', 'login.html'));
 });
 
+app.get('/admin-dashboard', (req, res) => {
+
+    // res.sendFile(path.join(__dirname, 'Public', 'contact.html'));
+    res.sendFile(path.join(__dirname, 'Public', 'admin-dashboard.html'));
+});
+
+
+app.get('/admin-payment-log', (req, res) => {
+
+    // res.sendFile(path.join(__dirname, 'Public', 'contact.html'));
+    res.sendFile(path.join(__dirname, 'Public', 'admin-payment-log.html'));
+});
+
+app.get('/admin-property-management', (req, res) => {
+
+    // res.sendFile(path.join(__dirname, 'Public', 'contact.html'));
+    res.sendFile(path.join(__dirname, 'Public', 'admin-property-management.html'));
+});
+
+app.get('/admin-user-management', (req, res) => {
+
+    // res.sendFile(path.join(__dirname, 'Public', 'contact.html'));
+    res.sendFile(path.join(__dirname, 'Public', 'admin-user-management.html'));
+});
+
+app.get('/getAllUser', (req, res) => {
+
+    // res.sendFile(path.join(__dirname, 'Public', 'contact.html'));
+    // res.sendFile(path.join(__dirname, 'Public', 'admin-user-management.html'));
+    sql.query(`SELECT * FROM Application.Users`)
+        .then(result => {
+            if (result.recordset.length > 0) {
+                console.log("Users found: " + result.recordset.length);
+                res.json(result.recordset);
+            } else {
+                console.log("No users found");
+                res.status(404).send("No users found");
+            }
+        })
+        .catch(err => {
+            console.log("Error: " + err);
+            res.status(500).send("Error: " + err);
+        });
+});
+
+
+
+
 
 
 

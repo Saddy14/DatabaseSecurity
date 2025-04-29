@@ -19,13 +19,13 @@
             <div class="logo-name"><span>Home</span>WoW</div>
         </a>
         <ul class="side-menu">
-            <li class="active"><a id="sidebar-dashboard" href="#"><i class='bx bxs-dashboard'></i>Dashboard</a></li>
-            <li><a id="admin-property-management" href="#"><i class='bx bx bx-home'></i>Property Management</a></li>
-            <li><a id="admin-user-management" href="#"><i class='bx bx-group'></i>User Management</a></li>
-            <li><a id="admin-payment-log" href="#"><i class='bx bx bx-detail'></i>Payment Log</a></li>
+            <li class="active"><a id="sidebar-dashboard" href="admin-dashboard"><i class='bx bxs-dashboard'></i>Dashboard</a></li>
+            <li><a id="admin-property-management" href="admin-property-management"><i class='bx bx bx-home'></i>Property Management</a></li>
+            <li><a id="admin-user-management" href="admin-user-management"><i class='bx bx-group'></i>User Management</a></li>
+            <li><a id="admin-payment-log" href="admin-payment-log"><i class='bx bx bx-detail'></i>Payment Log</a></li>
         </ul>
         <ul class="side-menu">
-            <li><a href="admin-contact-us.html" class="contact-us"><i class='bx bx bx-phone'></i>Contact Us</a></li>
+            <!-- <li><a href="/contact" class="contact-us"><i class='bx bx bx-phone'></i>Contact Us</a></li> -->
             <li><a href="/logout" class="logout"><i class='bx bx-log-out-circle'></i>Logout</a></li>
         </ul>
     </div>
@@ -185,7 +185,7 @@
 
     <script src="admin.js"></script>
 </body>
-<script>
+<!-- <script>
     window.onload = function () {
         fetch('/current-user')
             .then(response => response.json())
@@ -209,6 +209,6 @@
             })
             .catch(error => console.error(error));
     };
-</script>
+</script> -->
 
 </html>
