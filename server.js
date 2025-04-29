@@ -99,8 +99,6 @@ app.get('/admin-user-management', (req, res) => {
 
 app.get('/getAllUser', (req, res) => {
 
-    // res.sendFile(path.join(__dirname, 'Public', 'contact.html'));
-    // res.sendFile(path.join(__dirname, 'Public', 'admin-user-management.html'));
     sql.query(`SELECT * FROM Application.Users`)
         .then(result => {
             if (result.recordset.length > 0) {
