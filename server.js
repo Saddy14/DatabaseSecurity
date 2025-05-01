@@ -24,6 +24,30 @@ connect() //? Connect to the database
     })
 
 
+app.delete('/deleteUser/:id', (req, res) => {
+
+    const userId = req.params.id;
+    console.log("Delete User Info:");
+    console.log(req.body);
+
+    sql.query(`DELETE FROM Application.Users WHERE id = ${userId}`)
+        .then(result => {
+            if (result.rowsAffected[0] > 0) {
+                console.log("User deleted Id: " + userId);
+                res.status(200).send("User deleted Id: " + userId);
+            } else {
+                console.log("User not found: " + userId);
+                res.status(404).send("User not found: " + userId);
+            }
+        })
+        .catch(err => {
+            console.log("Error: " + err);
+            res.status(500).send("Error: " + err);
+        });
+
+
+});
+
 app.get('/login', (req, res) => {
 
     res.sendFile(path.join(__dirname, 'Public', 'login.html'));
@@ -33,7 +57,7 @@ app.post('/login', (req, res) => {
 
     console.log("Login Form Info:");
     console.log(req.body);
-    
+
     sql.query(`SELECT * FROM Application.Users WHERE email = '${req.body.email}' AND password = '${req.body.password}'`)
         .then(result => {
             if (result.recordset.length > 0) {
@@ -41,7 +65,7 @@ app.post('/login', (req, res) => {
                 res.sendFile(path.join(__dirname, 'Public', 'admin-dashboard.html'));
             } else {
                 console.log("User not found");
-                res.status(401).send("Invalid email or password");
+                res.redirect('/login');
             }
         })
         .catch(err => {
@@ -114,14 +138,6 @@ app.get('/getAllUser', (req, res) => {
             res.status(500).send("Error: " + err);
         });
 });
-
-
-
-
-
-
-
-
 
 
 app.listen(port, () => {

@@ -108,36 +108,5 @@
 
     <script src="admin.js"></script>
 </body>
-<script>
-    window.onload = function () {
-
-        // Fetch all users
-        fetch('getAllUser')
-            .then(response => response.json())
-            .then(users => {
-                const tbody = document.querySelector('.orders table tbody');
-
-                users.forEach(user => {
-                    // Skip users with userType of 'Admin'
-                    if (user.Type === 'Admin') {
-                        return;
-                    }
-
-                    const userHtml = `
-                <tr>
-                    <td><p>${user.name}</p></td>
-                    <td>${user.phone}</td>
-                    <td>${user.email}</td>
-                    <td><span class="user-type tenant">Tenant</span></td>
-                    <td><button id="remove-${user.id}" class="remove-user" type="submit">Remove</button></td>
-                </tr>
-            `;
-                    tbody.innerHTML += userHtml;
-                });
-
-            })
-            // .catch(error => console.error(error));
-    };
-</script>
 
 </html>
