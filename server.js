@@ -60,9 +60,12 @@ app.post('/login', (req, res) => {
 
     sql.query(`SELECT * FROM Application.Users WHERE email = '${req.body.email}' AND password = '${req.body.password}'`)
         .then(result => {
-            if (result.recordset.length > 0) {
+            if (result.recordset.length > 0 && result.recordset[0].Type === 'Admin' || result.recordset[0].Type === 'admin') {
                 console.log("User found: " + result.recordset[0].email);
                 res.sendFile(path.join(__dirname, 'Public', 'admin-dashboard.html'));
+            } else if (result.recordset.length > 0 && result.recordset[0].Type === 'Tenant') {
+                console.log("User found: " + result.recordset[0].email);
+                res.sendFile(path.join(__dirname, 'Public', 'tenant-dashboard.html'));
             } else {
                 console.log("User not found");
                 res.redirect('/login');
@@ -137,6 +140,25 @@ app.get('/getAllUser', (req, res) => {
             console.log("Error: " + err);
             res.status(500).send("Error: " + err);
         });
+});
+
+app.post('/signup', (req, res) => {
+    
+        console.log("Sign Up Form Info:");
+        console.log(req.body);
+        // res.json(req.body);
+    
+        sql.query(`INSERT INTO Application.Users (name, gender, email, phone, MyKad, password, Type) VALUES ('${req.body.name}', '${req.body.gender}', '${req.body.email}', '${req.body.phone}', '${req.body.icNum}', '${req.body.password}', '${req.body.userType}')`)
+            .then(result => {
+                console.log("User created: " + req.body.email);
+                // res.status(200).send("User created: " + req.body.email);
+                res.redirect('/login');
+            })
+            .catch(err => {
+                console.log("Error: " + err);
+                res.status(500).send("Error: " + err);
+                res.redirect('/sign-up');
+            });
 });
 
 
