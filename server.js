@@ -3,6 +3,8 @@ const app = express()
 const port = 3000
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const https = require('https');
+const fs = require('fs');
 const path = require('path');
 const { connect, sql } = require('./db.js')
 
@@ -13,6 +15,12 @@ app.use(cors()) //? For CORS
 // Serve static files
 app.use(express.static(path.join(__dirname, 'Public')));
 
+
+// Load certificate and key
+const options = {
+    key: fs.readFileSync(path.join(__dirname, '/certs/server.key')),
+    cert: fs.readFileSync(path.join(__dirname, '/certs/server.cert'))
+};
 
 connect() //? Connect to the database
 
@@ -162,7 +170,13 @@ app.post('/signup', (req, res) => {
 });
 
 
-app.listen(port, () => {
+// app.listen(port, () => {
 
-    console.log("Listening on port " + port);
-})
+//     console.log("Listening on port " + port);
+// })
+
+
+// Start HTTPS server
+https.createServer(options, app).listen(port, () => {
+    console.log('HTTPS Server running on port 3000');
+});

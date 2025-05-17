@@ -21,6 +21,27 @@ INSERT INTO Application.Users (name, gender, email, phone, MyKad, password, Type
 ('Siti Nurhaliza', 'Female', 'siti@example.com', '013-7654321', '880212-10-5678', 'sitiPass88', 'Tenant'),
 ('Lim Wei Jie', 'Male', 'lim@example.com', '017-1122334', '950305-08-9999', 'limSecure95', 'Tenant');
 
+INSERT INTO Application.Users (name, gender, email, phone, MyKad, password, Type) VALUES
+('Ali Bin Ahmad', 'Male', 'ali@example.com', '012-3456789', '900101-14-1234', 'passAli123', 'Tenant'),
+('Siti Nurhaliza', 'Female', 'siti@example.com', '013-7654321', '880212-10-5678', 'sitiPass88', 'Tenant'),
+('Lim Wei Jie', 'Male', 'lim@example.com', '017-1122334', '950305-08-9999', 'limSecure95', 'Tenant'),
+('Ahmad Zaki', 'Male', 'ahmad@example.com', '014-1234567', '910102-04-1111', 'ahmadPass123', 'Tenant'),
+('Maya Aishah', 'Female', 'maya@example.com', '019-8765432', '950509-12-2222', 'mayaPass55', 'Tenant'),
+('John Tan', 'Male', 'john@example.com', '016-3456789', '890703-10-5555', 'johnSecure99', 'Tenant'),
+('Nurul Iman', 'Female', 'nurul@example.com', '013-1239876', '890819-05-3434', 'nurulPass88', 'Tenant'),
+('David Ong', 'Male', 'david@example.com', '017-9087654', '950104-03-2222', 'davidSecure77', 'Tenant'),
+('Lina Muthu', 'Female', 'lina@example.com', '011-2233445', '920312-06-4321', 'linaPass99', 'Tenant'),
+('Mohd Reza', 'Male', 'reza@example.com', '018-1122333', '930623-02-9876', 'rezaPass100', 'Tenant'),
+('Fatin Zara', 'Female', 'fatin@example.com', '016-6677889', '910920-11-8765', 'fatinSecure66', 'Tenant'),
+('Kumar Ramasamy', 'Male', 'kumar@example.com', '014-9988776', '911212-09-5432', 'kumarPass22', 'Tenant'),
+('Emily Lee', 'Female', 'emily@example.com', '019-1234445', '950506-10-1111', 'emilyPass55', 'Tenant'),
+('Azlan Hussin', 'Male', 'azlan@example.com', '011-3344556', '890802-01-3333', 'azlanPass44', 'Tenant'),
+('Carla Gomez', 'Female', 'carla@example.com', '013-7755332', '910404-07-8888', 'carlaPass22', 'Tenant'),
+('Khalid Ibrahim', 'Male', 'khalid@example.com', '018-1238899', '950215-11-6666', 'khalidSecure44', 'Tenant'),
+('Siti Zulaikha', 'Female', 'zulaikha@example.com', '016-4433221', '890613-02-4444', 'zulaikhaPass33', 'Tenant'),
+('Vincent Tan', 'Male', 'vincent@example.com', '014-5556677', '900505-10-2222', 'vincentPass101', 'Tenant'),
+('Aisha Binti Zaki', 'Female', 'aisha@example.com', '013-8877665', '910701-12-9988', 'aishaPass123', 'Tenant'),
+('Mohd Amirul', 'Male', 'amirul@example.com', '019-4455778', '920804-11-5555', 'amirulSecure88', 'Tenant');
 
 
 -- Create CreditCards table under Application schema
