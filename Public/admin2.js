@@ -7,9 +7,9 @@ window.onload = function () {
 
             users.forEach(user => {
                 // Skip users with userType of 'Admin'
-                // if (user.Type === 'Admin') {
-                //   return;
-                // }
+                if (user.Type === 'Admin') {
+                  return;
+                }
 
                 const userHtml = `
             <tr>

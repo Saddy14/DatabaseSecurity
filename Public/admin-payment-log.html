@@ -107,30 +107,6 @@
 
     <script src="admin.js"></script>
 </body>
-<script>
-    window.onload = function () {
-        fetch('/current-user')
-            .then(response => response.json())
-            .then(user => {
-                // document.getElementById('account-name').textContent = user.name;
 
-                // // Update the href of the anchor dashboard link
-                document.getElementById('sidebar-dashboard').href = `/admin-dashboard.html?username=${user.name}&userType=${user.userType}&userId=${user.id}`;
-
-                // Update the href of the my property link
-                document.getElementById('admin-property-management').href = `/admin-property-management.html?username=${user.name}&userType=${user.userType}&userId=${user.id}`;
-
-                // Update the href of the user management link
-                document.getElementById('admin-user-management').href = `/admin-user-management.html?username=${user.name}&userType=${user.userType}&userId=${user.id}`;
-
-                // Update the href of the payment log link
-                document.getElementById('admin-payment-log').href = `/admin-payment-log.html?username=${user.name}&userType=${user.userType}&userId=${user.id}`;
-
-                // Update the href of the contact us link
-                // document.getElementById('contact-us').href = `/owner-agent-contact-us.html?username=${user.name}&userType=${user.userType}&userId=${user.id}`;
-            })
-            .catch(error => console.error(error));
-    };
-</script>
 
 </html>
