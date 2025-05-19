@@ -13,3 +13,7 @@
 - NodeJS (JavaScript)
 - ExpressJS
 - MS SQL
+
+### SQL_Data.sql
+- Ignore the SQL_Data.sql file as it just contains some sample data
+- not part of the project
