@@ -61,6 +61,12 @@ app.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, 'Public', 'login.html'));
 });
 
+app.get('/login-admin', (req, res) => {
+
+    res.sendFile(path.join(__dirname, 'Public', 'login-admin.html'));
+});
+
+
 app.post('/login', (req, res) => {
 
     console.log("Login Form Info:");
@@ -68,15 +74,37 @@ app.post('/login', (req, res) => {
 
     sql.query(`SELECT * FROM Application.Users WHERE email = '${req.body.email}' AND password = '${req.body.password}'`)
         .then(result => {
-            if (result.recordset.length > 0 && result.recordset[0].Type === 'Admin' || result.recordset[0].Type === 'admin') {
-                console.log("User found: " + result.recordset[0].email);
-                res.sendFile(path.join(__dirname, 'Public', 'admin-dashboard.html'));
-            } else if (result.recordset.length > 0 && result.recordset[0].Type === 'Tenant') {
+            if (result.recordset.length > 0 && result.recordset[0].Type === 'Tenant') {
                 console.log("User found: " + result.recordset[0].email);
                 res.sendFile(path.join(__dirname, 'Public', 'tenant-dashboard.html'));
+            } else if (result.recordset.length > 0 && result.recordset[0].Type === 'Owner/Agent') {
+                console.log("User found: " + result.recordset[0].email);
+                res.sendFile(path.join(__dirname, 'Public', 'owner-agent-my-property.html'));
             } else {
                 console.log("User not found");
                 res.redirect('/login');
+            }
+        })
+        .catch(err => {
+            console.log("Error: " + err);
+            res.status(500).send("Error: " + err);
+        });
+
+});
+
+app.post('/login-admin', (req, res) => {
+
+    console.log("Login Form Info:");
+    console.log(req.body);
+
+    sql.query(`SELECT * FROM Application.Staff WHERE email = '${req.body.email}' AND password = '${req.body.password}'`)
+        .then(result => {
+            if (result.recordset.length > 0 && result.recordset[0].Type === 'Admin' || result.recordset[0].Type === 'admin') {
+                console.log("User found: " + result.recordset[0].email);
+                res.sendFile(path.join(__dirname, 'Public', 'admin-dashboard.html'));
+            } else {
+                console.log("User not found");
+                res.redirect('/login-admin');
             }
         })
         .catch(err => {
@@ -104,7 +132,8 @@ app.get('/contact', (req, res) => {
 app.get('/logout', (req, res) => {
 
     // res.sendFile(path.join(__dirname, 'Public', 'contact.html'));
-    res.sendFile(path.join(__dirname, 'Public', 'login.html'));
+    // res.sendFile(path.join(__dirname, 'Public', 'login.html'));
+    res.redirect('/login');
 });
 
 app.get('/admin-dashboard', (req, res) => {
@@ -151,22 +180,22 @@ app.get('/getAllUser', (req, res) => {
 });
 
 app.post('/signup', (req, res) => {
-    
-        console.log("Sign Up Form Info:");
-        console.log(req.body);
-        // res.json(req.body);
-    
-        sql.query(`INSERT INTO Application.Users (name, gender, email, phone, MyKad, password, Type) VALUES ('${req.body.name}', '${req.body.gender}', '${req.body.email}', '${req.body.phone}', '${req.body.icNum}', '${req.body.password}', '${req.body.userType}')`)
-            .then(result => {
-                console.log("User created: " + req.body.email);
-                // res.status(200).send("User created: " + req.body.email);
-                res.redirect('/login');
-            })
-            .catch(err => {
-                console.log("Error: " + err);
-                res.status(500).send("Error: " + err);
-                res.redirect('/sign-up');
-            });
+
+    console.log("Sign Up Form Info:");
+    console.log(req.body);
+    // res.json(req.body);
+
+    sql.query(`INSERT INTO Application.Users (name, gender, email, phone, MyKad, password, Type) VALUES ('${req.body.name}', '${req.body.gender}', '${req.body.email}', '${req.body.phone}', '${req.body.icNum}', '${req.body.password}', '${req.body.userType}')`)
+        .then(result => {
+            console.log("User created: " + req.body.email);
+            // res.status(200).send("User created: " + req.body.email);
+            res.redirect('/login');
+        })
+        .catch(err => {
+            console.log("Error: " + err);
+            res.status(500).send("Error: " + err);
+            res.redirect('/sign-up');
+        });
 });
 
 

@@ -116,3 +116,21 @@ ALTER COLUMN ownerID INT NOT NULL;
 -- Step 4: Add foreign key constraint
 ALTER TABLE Application.Property
 ADD CONSTRAINT FK_Property_User FOREIGN KEY (ownerID) REFERENCES Application.Users(id);
+
+
+-- Admin 
+CREATE TABLE Application.Staff (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    gender VARCHAR(10) CHECK (gender IN ('Male', 'Female')),
+    email VARCHAR(100) NOT NULL,
+    phone VARCHAR(20) NOT NULL,
+    MyKad VARCHAR(14) NOT NULL, -- Format: YYMMDD-PB-####
+    password VARCHAR(100) NOT NULL,
+    Type VARCHAR(20) NOT NULL DEFAULT 'Admin'
+);
+
+
+INSERT INTO Application.Users (name, gender, email, phone, MyKad, password, Type) VALUES
+('Ali Bin Ahmad', 'Male', 'ali@homewow.com', '012-3456789', '900101-14-1234', 'admin', 'Admin'),
+('Siti Nurhaliza', 'Female', 'siti@example.com', '013-7654321', '880212-10-5678', 'sitiPass88', 'Admin');
