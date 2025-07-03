@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = 80
+const port = 3000
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const https = require('https');
@@ -409,5 +409,5 @@ app.post('/signup', (req, res) => {
 
 // Start HTTPS server
 https.createServer(options, app).listen(port, () => {
-    console.log('HTTPS Server running on port 80');
+    console.log('HTTPS Server running on port 3000');
 });
