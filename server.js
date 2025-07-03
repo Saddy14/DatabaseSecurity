@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = 3000
+const port = 80
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const https = require('https');
@@ -31,7 +31,7 @@ connect() //? Connect to the database
         console.log("Error connecting to the database: " + err)
     })
 
-
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 app.delete('/deleteUser/:id', (req, res) => {
 
     const userId = req.params.id;
@@ -66,7 +66,7 @@ app.get('/login-admin', (req, res) => {
     res.sendFile(path.join(__dirname, 'Public', 'login-admin.html'));
 });
 
-
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 app.post('/login', (req, res) => {
 
     console.log("Login Form Info:");
@@ -92,6 +92,7 @@ app.post('/login', (req, res) => {
 
 });
 
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 app.post('/login-admin', (req, res) => {
 
     console.log("Login Form Info:");
@@ -161,6 +162,7 @@ app.get('/admin-user-management', (req, res) => {
     res.sendFile(path.join(__dirname, 'Public', 'admin-user-management.html'));
 });
 
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 app.get('/getAllUser', (req, res) => {
 
     sql.query(`SELECT * FROM Application.Users`)
@@ -179,6 +181,7 @@ app.get('/getAllUser', (req, res) => {
         });
 });
 
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 app.post('/signup', (req, res) => {
 
     console.log("Sign Up Form Info:");
@@ -199,13 +202,13 @@ app.post('/signup', (req, res) => {
 });
 
 
-// app.listen(port, () => {
+app.listen(port, () => {
 
-//     console.log("Listening on port " + port);
-// })
+    console.log("Listening on port " + port);
+})
 
 
 // Start HTTPS server
-https.createServer(options, app).listen(port, () => {
-    console.log('HTTPS Server running on port 3000');
-});
+// https.createServer(options, app).listen(port, () => {
+//     console.log('HTTPS Server running on port 3000');
+// });
